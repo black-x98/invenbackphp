@@ -31,7 +31,9 @@ class Model_products extends CI_Model
 	public function create($data)
 	{
 		if($data) {
+			//print("INSIDE THE DATABASE CREATE METHOD");
 			$insert = $this->db->insert('products', $data);
+			//print("TRUE");
 			return ($insert == true) ? true : false;
 		}
 	}

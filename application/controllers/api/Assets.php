@@ -26,12 +26,12 @@ class Assets extends REST_Controller {
         
         foreach ($data as $key => $value) {
             $tmp = new asset_response();
-            $store_data = $this->model_stores->getStoresData($value['store_id']);
+            $store_data = "dummystore";//$this->model_stores->getStoresData($value['store_id']);
             $tmp->sku = $value['sku'];
             $tmp->name = $value['name'];
             $tmp->price = $value['price'];;
             $tmp->quantity = $value['qty'];
-            $tmp->store_name = $store_data['name'];
+            $tmp->store_name = "dummystore";
             $tmp->availability = $value['availability'];
             $tmp->status = $value['status'];
             $tmp->request_type = $value['request_type'];
@@ -49,8 +49,6 @@ class Assets extends REST_Controller {
         $this->form_validation->set_rules('sku', 'SKU', 'trim|required');
         $this->form_validation->set_rules('price', 'Price', 'trim|required');
         $this->form_validation->set_rules('qty', 'Qty', 'trim|required');
-        $this->form_validation->set_rules('store', 'Store', 'trim|required');
-        $this->form_validation->set_rules('availability', 'Availability', 'trim|required');
 
 
         if ($this->form_validation->run() == TRUE) {
@@ -66,6 +64,8 @@ class Assets extends REST_Controller {
                 'category_id' => json_encode($this->input->post('category')),
                 'store_id' => $this->input->post('store'),
                 'availability' => $this->input->post('availability'),
+                'request_type' => $this->input->post('request_type'),
+                'status' => $this->input->post('status'),
             );
 
             $create = $this->model_products->create($data);
